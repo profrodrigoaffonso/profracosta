@@ -39,4 +39,26 @@ class TestesController extends AppController
 
     	$this->set(compact('comando'));
     }
+
+    public function novena()
+    {
+    	$dias = [];
+    	if($this->request->is('post')){
+    		$data = $this->request->getData();
+    		$inicio = $this->dateDB($data['inicio']);    		
+
+    		for ($i=1; $i <=9 ; $i++) {
+    			if($i>1){
+    				$inicio = date('Y-m-d', strtotime("+1 days",strtotime($inicio)));
+
+    			}
+    			$dias["{$i}º"] = $inicio;
+    			
+    		}
+    	}
+
+    	$this->set(compact("dias"));
+    }
+
+
 }
